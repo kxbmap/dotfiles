@@ -39,9 +39,12 @@ try {
     }
 
     '- シンボリックリンクを作成します'
-    MakeLink $Profile
-    MakeLink $Profile.CurrentUserAllHosts
-
+    @(
+        $Profile
+        $Profile.CurrentUserAllHosts
+        '~\.sbt'
+        '~\.sbtrc'
+    ) | % { MakeLink $_ }
 
     '* セットアップが完了しました'
 

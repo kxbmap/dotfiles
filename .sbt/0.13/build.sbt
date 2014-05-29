@@ -1,0 +1,5 @@
+useJGit
+
+showCurrentGitBranch
+
+graphSettings
