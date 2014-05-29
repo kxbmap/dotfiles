@@ -36,7 +36,7 @@ try {
             $target = Join-Path $dotfiles (Split-Path -Leaf $literal)
             New-Symlink $literal $target | % { "  * $_ => $target" }
         } else {
-            "  * Already exists: $literal"
+            "  * Skipped: $literal"
         }
     }
 
@@ -44,6 +44,7 @@ try {
     @(
         $Profile
         $Profile.CurrentUserAllHosts
+        Join-Path (Split-Path $Profile) Pscx.UserPreferences.ps1
         '~\.sbt'
         '~\.sbtrc'
     ) | % { MakeLink $_ }
