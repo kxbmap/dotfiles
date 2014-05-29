@@ -8,23 +8,25 @@ try {
         throw 'Please install PowerShell version >= 4.0'
     }
 
-    '- ヘルプを更新します'
+    '- Update help'
     Update-Help
 
-    '- PowerShell Community Extensionsをインストールします'
+    if (!(Get-Module -ListAvailable -Name 'PsGet')) {
+        '- Install PsGet'
+        (New-Object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex
+    }
+
     $pscxVersion = '3.1.3'
     $pscxUrl = 'http://pscx.codeplex.com/downloads/get/744915'
     $pscxPath = 'C:\Program Files (x86)\PowerShell Community Extensions\Pscx3\'
     if (!$Env:PSModulePath.Contains($pscxPath)) {
         $Env:PSModulePath += ";$pscxPath"
     }
-
     if (!(Get-Module -ListAvailable -Name 'Pscx')) {
+        '- Install PowerShell Community Extensions'
         $msi = Join-Path $Env:TEMP "Pscx-$pscxVersion.msi"
         Invoke-WebRequest -OutFile $msi -Uri $pscxUrl
         cmd /c msiexec /i $msi /qn
-    } else {
-        '  * PSCXはインストール済みです'
     }
 
     Import-Module Pscx
@@ -34,11 +36,11 @@ try {
             $target = Join-Path $dotfiles (Split-Path -Leaf $literal)
             New-Symlink $literal $target | % { "  * $_ => $target" }
         } else {
-            "  * 既に存在します: $literal"
+            "  * Already exists: $literal"
         }
     }
 
-    '- シンボリックリンクを作成します'
+    '- Make symbolic links'
     @(
         $Profile
         $Profile.CurrentUserAllHosts
@@ -46,7 +48,7 @@ try {
         '~\.sbtrc'
     ) | % { MakeLink $_ }
 
-    '* セットアップが完了しました'
+    '* Finished'
 
 } finally {
     $ErrorActionPreference = $originalErrorActionPreference
