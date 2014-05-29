@@ -16,6 +16,11 @@ try {
         (New-Object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex
     }
 
+    if (!(Get-Module -ListAvailable -Name 'PSReadline')) {
+        '- Install PSReadLine'
+        Install-Module PSReadLine
+    }
+
     $pscxVersion = '3.1.3'
     $pscxUrl = 'http://pscx.codeplex.com/downloads/get/744915'
     $pscxPath = 'C:\Program Files (x86)\PowerShell Community Extensions\Pscx3\'
