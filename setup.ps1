@@ -47,7 +47,7 @@ try {
         $Profile
         $Profile.CurrentUserAllHosts
         Join-Path $profileDir Pscx.UserPreferences.ps1
-        Join-Path $profileDir history.ps1
+        Join-Path $profileDir PSReadlineProfile.ps1
         '~\.sbt'
         '~\.sbtrc'
     ) | % {
