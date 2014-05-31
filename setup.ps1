@@ -41,15 +41,21 @@ try {
             $target = Join-Path $dotfiles (Split-Path -Leaf $literal)
             New-Symlink $literal $target | % { "  * $_ => $target" }
         } else {
-            "  * Skipped: $literal"
+            "  - Skipped: $literal"
         }
+    }
+
+    $profileDir = Split-Path $Profile
+    if (!(Test-Path $profileDir)) {
+        mkdir $profileDir
     }
 
     '- Make symbolic links'
     @(
         $Profile
         $Profile.CurrentUserAllHosts
-        Join-Path (Split-Path $Profile) Pscx.UserPreferences.ps1
+        Join-Path $profileDir Pscx.UserPreferences.ps1
+        Join-Path $profileDir history.ps1
         '~\.sbt'
         '~\.sbtrc'
     ) | % { MakeLink $_ }

@@ -1,4 +1,8 @@
-Import-Module Pscx -arg (Join-Path (Split-Path $Profile) Pscx.UserPreferences.ps1)
+$profileDir = Split-Path $Profile
+
+. (Join-Path $profileDir history.ps1)
+
+Import-Module Pscx -arg (Join-Path $profileDir Pscx.UserPreferences.ps1)
 
 Import-Module PSReadline
 
