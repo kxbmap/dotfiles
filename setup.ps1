@@ -1,8 +1,10 @@
 $originalErrorActionPreference = $ErrorActionPreference
 $ErrorActionPreference = 'Stop'
-try {
-    $dotfiles = Split-Path $MyInvocation.MyCommand.Path
 
+$dotfiles = Split-Path $MyInvocation.MyCommand.Path
+$profileDir = Split-Path $Profile
+
+try {
     # Check PowerShell version
     if ($PSVersionTable.PSVersion.Major -lt 4) {
         throw 'Please install PowerShell version >= 4.0'
@@ -34,23 +36,13 @@ try {
         cmd /c msiexec /i $msi /qn
     }
 
+
     Import-Module Pscx
 
-    function MakeLink($literal) {
-        if (!(Test-Path $literal)) {
-            $target = Join-Path $dotfiles (Split-Path -Leaf $literal)
-            New-Symlink $literal $target | % { "  * $_ => $target" }
-        } else {
-            "  - Skipped: $literal"
-        }
-    }
-
-    $profileDir = Split-Path $Profile
+    '- Make symbolic links'
     if (!(Test-Path $profileDir)) {
         mkdir $profileDir
     }
-
-    '- Make symbolic links'
     @(
         $Profile
         $Profile.CurrentUserAllHosts
@@ -58,7 +50,14 @@ try {
         Join-Path $profileDir history.ps1
         '~\.sbt'
         '~\.sbtrc'
-    ) | % { MakeLink $_ }
+    ) | % {
+        if (!(Test-Path $_)) {
+            $target = Join-Path $dotfiles (Split-Path -Leaf $_)
+            New-Symlink $_ $target | % { "  * $_ => $target" }
+        } else {
+            "  - Skipped: $_"
+        }
+    }
 
     '* Finished'
 
