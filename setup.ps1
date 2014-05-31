@@ -4,7 +4,18 @@ $ErrorActionPreference = 'Stop'
 $dotfiles = Split-Path $MyInvocation.MyCommand.Path
 $profileDir = Split-Path $Profile
 
+function IsAdministrator {
+    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = ([Security.Principal.WindowsPrincipal] $identity)
+    $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
 try {
+    # Check privilege
+    if (!(IsAdministrator)) {
+        throw 'Please run as administrator'
+    }
+
     # Check PowerShell version
     if ($PSVersionTable.PSVersion.Major -lt 4) {
         throw 'Please install PowerShell version >= 4.0'
