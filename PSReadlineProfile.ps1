@@ -8,15 +8,21 @@ Import-Module PSReadLine
 
 Set-PSReadLineOption -EditMode Emacs
 
+#
+Set-PSReadLineOption -BellStyle None
+
+Set-PSReadLineOption -MaximumHistoryCount 10000
+Set-PSReadLineOption -HistoryNoDuplicates
+
 # Searching for commands with up/down arrow is really handy.  The
 # option "moves to end" is useful if you want the cursor at the end
 # of the line while cycling through history like it does w/o searching,
 # without that option, the cursor will remain at the position it was
 # when you used up arrow, which can be useful if you forget the exact
 # string you started the search on.
-Set-PSReadLineOption -HistorySearchCursorMovesToEnd 
-Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
-Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadlineKeyHandler -Key Ctrl+P -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key Ctrl+N -Function HistorySearchForward
 
 # This is an example of a macro that you might use to execute a command.
 # This will add the command to history.
@@ -103,7 +109,7 @@ Set-PSReadlineKeyHandler -Key '(','{','[' `
     $line = $null
     $cursor = $null
     [PSConsoleUtilities.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
-    [PSConsoleUtilities.PSConsoleReadLine]::SetCursorPosition($cursor - 1)        
+    [PSConsoleUtilities.PSConsoleReadLine]::SetCursorPosition($cursor - 1)
 }
 
 Set-PSReadlineKeyHandler -Key ')',']','}' `
@@ -298,7 +304,7 @@ Set-PSReadlineKeyHandler -Key "Alt+%" `
             $alias = $ExecutionContext.InvokeCommand.GetCommand($token.Extent.Text, 'Alias')
             if ($alias -ne $null)
             {
-                $resolvedCommand = $alias.ResolvedCommandName 
+                $resolvedCommand = $alias.ResolvedCommandName
                 if ($resolvedCommand -ne $null)
                 {
                     $extent = $token.Extent

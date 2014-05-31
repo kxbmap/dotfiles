@@ -1,5 +1,6 @@
 # Persistent History
 $MaximumHistoryCount = 10000
+
 $historyPath = Join-Path (Split-Path $profile) history.csv
 
 function Distinct-History($history) {
@@ -9,22 +10,8 @@ function Distinct-History($history) {
     $history
 }
 
-function Save-HistoryAll() {
-    Distinct-History (Get-History -Count $MaximumHistoryCount) | Export-Csv $historyPath
-}
-
 function Save-HistoryIncremental() {
     Get-History -Count 1 | Export-Csv -Append $historyPath
-}
-
-function Load-History() {
-    Clear-History
-    Distinct-History (Import-Csv $historyPath) | ? { $_.CommandLine -ne 'exit' } | Add-History
-}
-
-# Hook powershell's exiting event & hide the registration with -supportevent (from nivot.org)
-Register-EngineEvent -SourceIdentifier powershell.exiting -SupportEvent -Action {
-    Save-HistoryAll
 }
 
 $oldPrompt = Get-Content Function:\prompt
@@ -38,6 +25,7 @@ Save-HistoryIncremental
 }
 
 # Load previous history, if it exists
-if ((Test-Path $historyPath)) {
-    Load-History
+if (Test-Path $historyPath) {
+    Distinct-History (Import-Csv $historyPath) | Add-History
+    Get-History | Export-Csv $historyPath
 }
