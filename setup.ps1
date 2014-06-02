@@ -61,6 +61,7 @@ try {
         Join-Path $profileDir Pscx.UserPreferences.ps1
         Join-Path $profileDir PSReadlineProfile.ps1
         Join-Path $profileDir posh-git.profile.ps1
+        Join-Path $profileDir prompt.ps1
         '~\.sbt'
         '~\.sbtrc'
     ) | % {
