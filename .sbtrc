@@ -2,3 +2,4 @@ alias c=compile
 alias tc=test:compile
 alias t=test
 alias tq=testQuick
+alias cd=project
