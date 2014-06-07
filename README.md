@@ -4,4 +4,4 @@ dotfiles
 Windows
 -------
 
-Execute setup.bat as Administrator
+Run setup.bat as Administrator
