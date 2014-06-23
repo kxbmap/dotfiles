@@ -64,6 +64,7 @@ try {
         Join-Path $profileDir prompt.ps1
         '~\.sbt'
         '~\.sbtrc'
+        '~\.gitconfig'
     ) | % {
         if (!(Test-Path $_)) {
             $target = Join-Path $dotfiles (Split-Path -Leaf $_)
