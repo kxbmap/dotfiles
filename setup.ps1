@@ -65,6 +65,7 @@ try {
         '~\.sbt'
         '~\.sbtrc'
         '~\.gitconfig'
+        '~\.gitconfig.windows'
     ) | % {
         if (!(Test-Path $_)) {
             $target = Join-Path $dotfiles (Split-Path -Leaf $_)
@@ -72,6 +73,14 @@ try {
         } else {
             "  - Skipped: $_"
         }
+    }
+
+    if (!(Test-Path '~\.gitconfig.local')) {
+        '- Create local .gitconfig'
+        Set-Content '~\.gitconfig.local' @"
+[include]
+  path = .gitconfig.windows
+"@
     }
 
     '* Finished'
