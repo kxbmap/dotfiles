@@ -1,47 +1,59 @@
+$dotfiles = Split-Path $global:MyInvocation.MyCommand.Path
+Push-Location $dotfiles
+
 $originalErrorActionPreference = $ErrorActionPreference
-$ErrorActionPreference = 'Stop'
 
 try {
-    $dotfiles = Split-Path $MyInvocation.MyCommand.Path
+    $ErrorActionPreference = 'Stop'
+
     $profileDir = Split-Path $Profile
 
     '- Make symbolic links'
-    @(
-        $Profile
-        $Profile.CurrentUserAllHosts
-        Join-Path $profileDir history.ps1
-        Join-Path $profileDir Pscx.UserPreferences.ps1
-        Join-Path $profileDir PSReadlineProfile.ps1
-        Join-Path $profileDir posh-git.profile.ps1
-        Join-Path $profileDir prompt.ps1
-        Join-Path $home .sbt
-        Join-Path $home .sbtrc
-        Join-Path $home .gitconfig
-        Join-Path $home .gitconfig.windows
-    ) | % {
-        if (!(Test-Path $_)) {
-            $target = Join-Path $dotfiles (Split-Path -Leaf $_)
-            if (!(Test-Path -PathType Container (Split-Path $_))) {
-                mkdir (Split-Path $_)
+    [ordered]@{
+        'Microsoft.PowerShell_profile.ps1' = $profileDir;
+        'profile.ps1' = $profileDir;
+        'history.ps1' = $profileDir;
+        'Pscx.UserPreferences.ps1' = $profileDir;
+        'PSReadlineProfile.ps1' = $profileDir;
+        'posh-git.profile.ps1' = $profileDir;
+        'prompt.ps1' = $profileDir;
+        '.sbt' = $home;
+        '.sbtrc' = $home;
+        '.gitconfig' = $home;
+        '.gitconfig.windows' = $home;
+    } | % { $_.GetEnumerator() } | % {
+        $literal = Join-Path $_.Value $_.Name
+        $target = Join-Path $dotfiles $_.Name
+        if (!(Test-Path $literal)) {
+            if (!(Test-Path -PathType Container (Split-Path $literal))) {
+                mkdir (Split-Path $literal)
             }
             if (Test-Path -PathType Container $target) {
-                cmd /c mklink /d $_ $target
+                cmd /c mklink /d $literal $target
             } else {
-                cmd /c mklink $_ $target
+                cmd /c mklink $literal $target
             }
+        } else {
+            "Skipped $literal"
         }
     }
 
-    '- Create local .gitconfig'
-    if (!(Test-Path '~\.gitconfig.local')) {
-        Set-Content '~\.gitconfig.local' @"
+    "- Create files"
+    [ordered]@{
+        $(Join-Path $home .gitconfig.local) = @"
 [include]
   path = .gitconfig.windows
-"@
+"@;
+    } | % { $_.GetEnumerator() } | % {
+        if (!(Test-Path $_.Name)) {
+            Set-Content $_.Name $_.Value
+            "Created $($_.Name)"
+        } else {
+            "Skipped $($_.Name)"
+        }
     }
-
-    '* Finished'
 
 } finally {
     $ErrorActionPreference = $originalErrorActionPreference
+    Pop-Location
 }

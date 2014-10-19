@@ -1,7 +1,7 @@
 # Persistent History
 $MaximumHistoryCount = 10000
 
-$historyPath = Join-Path (Split-Path $profile) history.csv
+$HistoryFilePath = Join-Path (Split-Path $profile) history.csv
 
 function Distinct-History($history) {
     [array]::Reverse($history)
@@ -11,11 +11,11 @@ function Distinct-History($history) {
 }
 
 function Save-HistoryIncremental() {
-    Get-History -Count 1 | Export-Csv -Append $historyPath
+    Get-History -Count 1 | Export-Csv -Append $HistoryFilePath
 }
 
 # Load previous history, if it exists
-if (Test-Path $historyPath) {
-    Distinct-History (Import-Csv $historyPath) | Add-History
-    Get-History | Export-Csv $historyPath
+if (Test-Path $HistoryFilePath) {
+    Distinct-History (Import-Csv $HistoryFilePath) | Add-History
+    Get-History | Export-Csv $HistoryFilePath
 }

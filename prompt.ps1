@@ -1,28 +1,23 @@
-if (Get-Module -ListAvailable -Name 'posh-git') {
-    function global:prompt {
-        $realLASTEXITCODE = $LASTEXITCODE
-        try {
-            Save-HistoryIncremental
+function global:prompt {
+    $realLASTEXITCODE = $LASTEXITCODE
+    try {
+        Save-HistoryIncremental
 
+        $current = $ExecutionContext.SessionState.Path.CurrentLocation
+        $level = '>' * ($NestedPromptLevel + 1)
+
+        if (Get-Module -ListAvailable -Name 'posh-git') {
             # Reset color, which can be messed up by Enable-GitColors
             $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
 
-            Write-Host($pwd.ProviderPath) -nonewline
+            Write-Host -NoNewline "PS $current"
             Write-VcsStatus
 
-            return "$('>' * ($nestedPromptLevel + 1)) "
-        } finally {
-            $global:LASTEXITCODE = $realLASTEXITCODE
+            "$level "
+        } else {
+            "PS $current$level "
         }
-    }
-} else {
-      $oldPrompt = Get-Content Function:prompt
-      if ($oldPrompt -notlike '*Save-HistoryIncremental*') {
-        $newPrompt = @"
-Save-HistoryIncremental
-
-$($oldPrompt)
-"@
-        $Function:prompt = [ScriptBlock]::Create($newPrompt)
+    } finally {
+        $global:LASTEXITCODE = $realLASTEXITCODE
     }
 }
