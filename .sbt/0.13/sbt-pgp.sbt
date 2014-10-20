@@ -6,14 +6,14 @@ lazy val isWindows = sys.props.get("os.name").exists(_.toLowerCase(en).contains(
 
 pgpSecretRing := {
   if (isWindows)
-    file("%APPDATA%/gnupg/secring.gpg")
+    file(sys.env("APPDATA")) / "gnupg" / "secring.gpg"
   else
     pgpSecretRing.value
 }
 
 pgpPublicRing := {
   if (isWindows)
-    file("%APPDATA%/gnupg/pubring.gpg")
+    file(sys.env("APPDATA")) / "gnupg" / "pubring.gpg"
   else
     pgpPublicRing.value
 }
