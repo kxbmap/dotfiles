@@ -1,3 +1,4 @@
+import com.typesafe.sbt.pgp.PgpKeys._
 import java.util.Locale.{ENGLISH => en}
 
 useGpg := true
