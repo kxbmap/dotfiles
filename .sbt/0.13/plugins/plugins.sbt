@@ -2,7 +2,7 @@ addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.1.8")
 
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.7.4")
 
-addSbtPlugin("com.typesafe.sbt" % "sbt-git" % "0.7.1")
+addSbtPlugin("com.typesafe.sbt" % "sbt-git" % "0.8.0")
 
 addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.0.0")
 
