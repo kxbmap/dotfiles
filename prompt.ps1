@@ -1,8 +1,6 @@
 function global:prompt {
     $realLASTEXITCODE = $LASTEXITCODE
     try {
-        Save-HistoryIncremental
-
         $current = $ExecutionContext.SessionState.Path.CurrentLocation
         $level = '>' * ($NestedPromptLevel + 1)
 

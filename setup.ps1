@@ -12,7 +12,6 @@ try {
     [ordered]@{
         'Microsoft.PowerShell_profile.ps1' = $profileDir;
         'profile.ps1' = $profileDir;
-        'history.ps1' = $profileDir;
         'Pscx.UserPreferences.ps1' = $profileDir;
         'PSReadlineProfile.ps1' = $profileDir;
         'posh-git.profile.ps1' = $profileDir;
