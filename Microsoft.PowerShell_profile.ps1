@@ -1,4 +1,4 @@
-$profileDir = Split-Path $Profile
+$private:profileDir = Split-Path $Profile
 
 if (Get-Module -ListAvailable -Name 'Pscx') {
     Import-Module Pscx -arg (Join-Path $profileDir Pscx.UserPreferences.ps1)
