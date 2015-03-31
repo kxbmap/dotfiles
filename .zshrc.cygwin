@@ -1,0 +1,3 @@
+PATH=`cygpath $JAVA_HOME/bin`:$PATH
+PATH=`cygpath $APPDATA/cabal/bin`:$PATH
+export PATH
