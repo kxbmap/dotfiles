@@ -6,5 +6,6 @@
 .sbt/boot/
 .sbt/**/target/
 .sbt/**/staging/
+.sbt/**/dependency/
 .sbt/*/credentials.sbt
 .sbt/gpg/
