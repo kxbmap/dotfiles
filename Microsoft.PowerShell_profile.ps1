@@ -1,3 +1,5 @@
+chcp 65001
+
 $private:profileDir = Split-Path $Profile
 
 if (Get-Module -ListAvailable -Name 'Pscx') {
