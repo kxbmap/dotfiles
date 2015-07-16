@@ -1,5 +1,8 @@
 chcp 65001
 
+$Env:JAVA_OPTS = '-Dfile.encoding=utf8'
+$Env:SBT_OPTS = '-Xmx512M -XX:ReservedCodeCacheSize=128m -Dsbt.log.format=true -Dscala.color'
+
 $private:profileDir = Split-Path $Profile
 
 if (Get-Module -ListAvailable -Name 'Pscx') {
