@@ -1,7 +1,8 @@
 chcp 65001
 
-$Env:JAVA_OPTS = '-Dfile.encoding=utf8'
-$Env:SBT_OPTS = '-server -Xms512M -Xmx512M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:+UseCompressedOops -XX:NewRatio=9 -XX:ReservedCodeCacheSize=100m -Dsbt.log.format=true -Dscala.color'
+$Env:JAVA_TOOL_OPTIONS = '-Dfile.encoding=utf8'
+$Env:JAVA_OPTS = ' '
+$Env:SBT_OPTS = '-server -Xms512M -Xmx2G -Xss1M -XX:+CMSClassUnloadingEnabled -XX:+UseCompressedOops -XX:NewRatio=9 -XX:ReservedCodeCacheSize=100m -Dsbt.log.format=true -Dscala.color'
 
 $private:profileDir = Split-Path $Profile
 
