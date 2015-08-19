@@ -8,4 +8,4 @@
 .sbt/**/staging/
 .sbt/**/dependency/
 .sbt/*/credentials.sbt
-.sbt/gpg/
+.sbt/gpg
