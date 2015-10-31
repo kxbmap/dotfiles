@@ -435,3 +435,17 @@ Set-PSReadlineOption -CommandValidationHandler {
         }
     }
 }
+
+# ghq + peco
+Set-PSReadlineKeyHandler -Key Ctrl+] `
+                         -BriefDescription SelectGHQDirectory `
+                         -LongDescription "Jump to the directory managed by ghq" `
+                         -ScriptBlock {
+    param($key, $arg)
+
+    $selected = $(ghq list -p | peco)
+    if ($selected) {
+        cd $selected
+    }
+    [PSConsoleUtilities.PSConsoleReadLine]::InvokePrompt()
+}
