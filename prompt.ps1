@@ -8,12 +8,12 @@ function global:prompt {
             # Reset color, which can be messed up by Enable-GitColors
             $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
 
-            Write-Host -NoNewline "PS $current"
+            Write-Host -NoNewline $current
             Write-VcsStatus
 
             "$level "
         } else {
-            "PS $current$level "
+            "$current$level "
         }
     } finally {
         $global:LASTEXITCODE = $realLASTEXITCODE
