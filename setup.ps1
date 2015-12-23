@@ -16,7 +16,6 @@ try {
         'PSReadlineProfile.ps1' = $profileDir;
         'posh-git.profile.ps1' = $profileDir;
         'prompt.ps1' = $profileDir;
-        '.sbt' = $home;
         '.sbtrc' = $home;
         '.gitconfig' = $home;
         'idea64.exe.vmoptions' = $(Join-Path $home '.IntelliJIdea14');
