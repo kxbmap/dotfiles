@@ -20,3 +20,8 @@ if (Get-Module -ListAvailable -Name 'posh-git') {
 
 # Set up a prompt
 . (Join-Path $profileDir prompt.ps1)
+
+# Alias
+Set-Alias dm docker-machine
+Set-Alias dc docker-compose
+Set-Alias fig docker-compose
