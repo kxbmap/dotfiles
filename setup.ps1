@@ -18,7 +18,6 @@ try {
         'prompt.ps1' = $profileDir;
         '.sbtrc' = $home;
         '.gitconfig' = $home;
-        'idea64.exe.vmoptions' = $(Join-Path $home '.IntelliJIdea14');
     } | % { $_.GetEnumerator() } | % {
         $literal = Join-Path $_.Value $_.Name
         $target = Join-Path $dotfiles $_.Name
