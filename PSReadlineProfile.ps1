@@ -162,7 +162,7 @@ Set-PSReadlineKeyHandler -Key '(','{','[' `
     $line = $null
     $cursor = $null
     [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
-    [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor - 1)        
+    [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor - 1)
 }
 
 Set-PSReadlineKeyHandler -Key ')',']','}' `
@@ -373,7 +373,7 @@ Set-PSReadlineKeyHandler -Key "Alt+%" `
             $alias = $ExecutionContext.InvokeCommand.GetCommand($token.Extent.Text, 'Alias')
             if ($alias -ne $null)
             {
-                $resolvedCommand = $alias.ResolvedCommandName 
+                $resolvedCommand = $alias.ResolvedCommandName
                 if ($resolvedCommand -ne $null)
                 {
                     $extent = $token.Extent
