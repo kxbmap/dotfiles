@@ -24,6 +24,8 @@ if (Get-Module -ListAvailable -Name 'posh-git') {
 . (Join-Path $profileDir prompt.ps1)
 
 # Alias
+Remove-Item Alias:cat
+Remove-Item -Force Alias:diff
 Set-Alias dm docker-machine
 Set-Alias dc docker-compose
 Set-Alias fig docker-compose
