@@ -23,7 +23,7 @@
                                       # Mutually exclusive with CD_GetChildItem.
 
     # TextEditor = 'Notepad.exe'        # Default text editor used by the Edit-File function
-    TextEditor = "$Env:ProgramFiles\Sublime Text 3\subl.exe"
+    TextEditor = "$HOME\bin\micro.exe"
 
     PromptTheme = 'Modern'            # Prompt string and window title updates.  To enable, first
                                       # set the ModulesToImport setting for Prompt below to $true.
