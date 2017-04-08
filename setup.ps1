@@ -15,7 +15,6 @@ try {
         'Pscx.UserPreferences.ps1' = $profileDir;
         'PSReadlineProfile.ps1' = $profileDir;
         'posh-git.profile.ps1' = $profileDir;
-        'prompt.ps1' = $profileDir;
         '.sbtrc' = $home;
         '.gitconfig' = $home;
     } | % { $_.GetEnumerator() } | % {

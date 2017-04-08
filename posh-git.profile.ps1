@@ -4,3 +4,4 @@ $Env:TMPDIR = $Env:TMP
 # Start-SshAgent -Quiet
 
 $GitPromptSettings.EnableWindowTitle = $true
+$GitPromptSettings.DefaultPromptAbbreviateHomeDirectory = $true

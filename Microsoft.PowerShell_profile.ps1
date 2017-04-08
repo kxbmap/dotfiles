@@ -20,9 +20,6 @@ if (Get-Module -ListAvailable -Name 'posh-git') {
     . (Join-Path $profileDir posh-git.profile.ps1)
 }
 
-# Set up a prompt
-. (Join-Path $profileDir prompt.ps1)
-
 # Alias
 Remove-Item Alias:cat
 Remove-Item -Force Alias:diff
