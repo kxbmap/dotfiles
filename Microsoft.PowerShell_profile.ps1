@@ -20,6 +20,11 @@ if (Get-Module -ListAvailable -Name 'posh-git') {
     . (Join-Path $profileDir posh-git.profile.ps1)
 }
 
+if (Test-Path "${Env:USERPROFILE}\.jabba\jabba.ps1") {
+    . "${Env:USERPROFILE}\.jabba\jabba.ps1"
+}
+. (Join-Path $profileDir jabba-upgrade.ps1)
+
 # Alias
 Remove-Item Alias:cat
 Remove-Item -Force Alias:diff
