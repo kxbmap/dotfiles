@@ -28,9 +28,6 @@ if (Test-Path "${Env:USERPROFILE}\.jabba\jabba.ps1") {
 # Alias
 Remove-Item Alias:cat
 Remove-Item -Force Alias:diff
-Set-Alias dm docker-machine
-Set-Alias dc docker-compose
-Set-Alias fig docker-compose
 
 if (Test-Path (Join-Path $profileDir local_profile.ps1)) {
     . (Join-Path $profileDir local_profile.ps1)
