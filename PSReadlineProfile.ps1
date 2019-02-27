@@ -503,9 +503,9 @@ Set-PSReadlineKeyHandler -Key Ctrl+] `
                          -ScriptBlock {
     param($key, $arg)
 
-    $selected = $(ghq list -p | peco)
+    $selected = $(ghq list | peco)
     if ($selected) {
-        cd $selected
+        cd (Join-Path $(ghq root) $selected)
     }
     [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
 }
