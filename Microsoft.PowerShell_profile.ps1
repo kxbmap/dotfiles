@@ -28,6 +28,7 @@ if (Test-Path "${Env:USERPROFILE}\.jabba\jabba.ps1") {
 # Alias
 Remove-Item Alias:cat
 Remove-Item -Force Alias:diff
+Remove-Item Alias:curl
 
 if (Test-Path (Join-Path $profileDir local_profile.ps1)) {
     . (Join-Path $profileDir local_profile.ps1)
