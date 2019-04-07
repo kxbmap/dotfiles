@@ -12,7 +12,7 @@ if (Get-Module -ListAvailable -Name 'Pscx') {
     Import-Module Pscx -arg (Join-Path $profileDir Pscx.UserPreferences.ps1)
 }
 
-if (Get-Module -ListAvailable -Name 'PSReadline') {
+if (Get-Module -ListAvailable -Name 'PSReadLine') {
     . (Join-Path $profileDir PSReadlineProfile.ps1)
 }
 
@@ -26,9 +26,8 @@ if (Test-Path "${Env:USERPROFILE}\.jabba\jabba.ps1") {
 . (Join-Path $profileDir jabba-upgrade.ps1)
 
 # Alias
-Remove-Item Alias:cat
-Remove-Item -Force Alias:diff
-Remove-Item Alias:curl
+Remove-Alias cat
+Remove-Alias -Force diff
 
 if (Test-Path (Join-Path $profileDir local_profile.ps1)) {
     . (Join-Path $profileDir local_profile.ps1)

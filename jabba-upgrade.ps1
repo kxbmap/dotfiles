@@ -2,7 +2,6 @@
 function jabba-upgrade
 {
   Invoke-Expression (
-    # Workaround URL until PS 6.0
-    Invoke-WebRequest https://github.com/kxbmap/jabba/raw/ps-utf8/install.ps1 -UseBasicParsing
+    Invoke-WebRequest https://github.com/shyiko/jabba/raw/master/install.ps1 -UseBasicParsing
   ).Content
 }
