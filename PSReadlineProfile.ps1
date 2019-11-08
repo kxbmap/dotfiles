@@ -496,14 +496,14 @@ Set-PSReadLineOption -CommandValidationHandler {
     }
 }
 
-# ghq + peco
+# ghq + fzf
 Set-PSReadLineKeyHandler -Key Ctrl+] `
                          -BriefDescription SelectGHQDirectory `
                          -LongDescription "Jump to the directory managed by ghq" `
                          -ScriptBlock {
     param($key, $arg)
 
-    $selected = $(ghq list | peco)
+    $selected = $(ghq list | fzf --reverse)
     if ($selected) {
         cd (Join-Path $(ghq root) $selected)
     }
