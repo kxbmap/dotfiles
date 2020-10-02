@@ -503,7 +503,7 @@ Set-PSReadLineKeyHandler -Key Ctrl+] `
                          -ScriptBlock {
     param($key, $arg)
 
-    $selected = $(ghq list | fzf --reverse)
+    $selected = $(ghq list | fzf --reverse --cycle)
     if ($selected) {
         cd (Join-Path $(ghq root) $selected)
     }
