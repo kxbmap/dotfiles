@@ -1,5 +1,5 @@
 alias c=compile
-alias tc=test:compile
+alias tc=Test/compile
 alias t=test
 alias tq=testQuick
 alias cd=project
