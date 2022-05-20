@@ -1,4 +1,4 @@
-chcp 65001
+# chcp 65001
 
 $Env:LANG = 'ja_JP.UTF-8'
 
