@@ -478,24 +478,6 @@ Set-PSReadLineKeyHandler -Key Alt+j `
     [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
 }
 
-Set-PSReadLineOption -CommandValidationHandler {
-    param([System.Management.Automation.Language.CommandAst]$CommandAst)
-
-    switch ($CommandAst.GetCommandName())
-    {
-        'git' {
-            $gitCmd = $CommandAst.CommandElements[1].Extent
-            switch ($gitCmd.Text)
-            {
-                'cmt' {
-                    [Microsoft.PowerShell.PSConsoleReadLine]::Replace(
-                        $gitCmd.StartOffset, $gitCmd.EndOffset - $gitCmd.StartOffset, 'commit')
-                }
-            }
-        }
-    }
-}
-
 # ghq + fzf
 Set-PSReadLineKeyHandler -Key Ctrl+] `
                          -BriefDescription SelectGHQDirectory `
